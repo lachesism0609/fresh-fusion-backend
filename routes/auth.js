@@ -25,9 +25,15 @@ router.post('/register', async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    res.status(201).json({ token, username: user.username, role: user.role });
+    res.status(201).json({
+      success: true,
+      message: 'Registration successful',
+      token,
+      username: user.username,
+      role: user.role
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Registration failed' });
+    res.status(500).json({ success: false, error: 'Registration failed' });
   }
 });
 
@@ -51,9 +57,15 @@ router.post('/login', async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    res.json({ token, username: user.username, role: user.role });
+    res.json({
+      success: true,
+      message: 'Login successful',
+      token,
+      username: user.username,
+      role: user.role
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Login failed' });
+    res.status(500).json({ success: false, error: 'Login failed' });
   }
 });
 

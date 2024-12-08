@@ -1,7 +1,7 @@
 {
   "name": "fresh-fusion-backend",
   "version": "1.0.0",
-  "description": "Fresh Fusion Backend API",
+  "description": "- **Group**: Sushi Lover\r - **Members**: \r   - Jiahui Pan (AE8278)\r   - Tingting Huang (AE8277)",
   "main": "app.js",
   "scripts": {
     "start": "node server.js",
@@ -13,19 +13,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "2.4.3",
-    "cors": "2.8.5",
-    "dotenv": "16.4.7",
-    "express": "4.21.2",
-    "express-validator": "7.2.0",
-    "jsonwebtoken": "9.0.2",
-    "mongoose": "7.6.3"
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.4"
   },
   "devDependencies": {
-    "jest": "29.7.0",
-    "nodemon": "3.1.7"
-  },
-  "engines": {
-    "node": ">=16.0.0"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.7"
   }
 }

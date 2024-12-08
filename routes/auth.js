@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const { authenticateJWT } = require('../middleware/authMiddleware');
 
 router.post('/register', async (req, res) => {
@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'User not found' });
     }
 
-    const validPassword = await bcrypt.compare(password, user.password);
+    const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
       return res.status(401).json({ error: 'Invalid password' });
     }

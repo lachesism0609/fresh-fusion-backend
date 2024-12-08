@@ -2,8 +2,9 @@ services:
   - type: web
     name: fresh-fusion-api
     env: node
+    nodeVersion: 18.x
     rootDir: fresh-fusion-backend
-    buildCommand: npm install
+    buildCommand: npm ci --only=production
     startCommand: node server.js
     envVars:
       - key: MONGODB_URI

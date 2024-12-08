@@ -1,4 +1,7 @@
-# Web Services and Server Programming - Fresh Fusion Backend
+# Fresh Fusion Backend - Web Services and Server Programming
+Course: TTC8430-3005 Web server programming with an application framework
+Date: December 2024
+
 - **Group**: Sushi Lover
 - **Members**: 
   - Jiahui Pan (AE8278)
@@ -6,6 +9,44 @@
 
 ## Project Overview
 Backend services for Fresh Fusion sushi restaurant web application, providing APIs for menu management, order processing, and user authentication.
+
+## Source Code
+The complete source code is available on GitHub:
+- Repository: [Fresh-Fusion-Backend](https://gitlab.labranet.jamk.fi/AE8278/sushi-lover/-/tree/main/fresh-fusion-backend)
+- Branch: main
+- Access: Public
+
+## Application Structure
+fresh-fusion-backend/
+├── app.js                 # Main application entry point
+├── server.js             # Server configuration
+├── package.json          # Project dependencies
+├── README.md            # Project documentation
+├── test.http            # API endpoint tests
+│
+├── controllers/         # Business logic
+│   ├── authController.js  # Authentication logic
+│   ├── menuController.js  # Menu management
+│   └── orderController.js # Order processing
+│
+├── middleware/         # Custom middleware
+│   └── authMiddleware.js # Authentication middleware
+│
+├── models/            # Database schemas
+│   ├── MenuItem.js    # Menu item model
+│   ├── Order.js       # Order model
+│   └── User.js        # User model
+│
+├── routes/           # API routes
+│   ├── auth.js       # Authentication routes
+│   ├── menu.js       # Menu routes
+│   └── orders.js     # Order routes
+│
+├── seeds/           # Database seeders
+│   └── seedMenu.js  # Menu items seeder
+│
+└── utils/          # Utility functions
+    └── config.js   # Configuration settings
 
 ## Technical Stack
 ### Backend Framework
@@ -35,55 +76,57 @@ Backend services for Fresh Fusion sushi restaurant web application, providing AP
 - **Cors** for cross-origin resource sharing
 - **Express-validator** for input validation
 
-## API Endpoints Planning
+## API Endpoints Implementation
 1. **Menu Management**
-   - GET /api/menu - Retrieve all menu items
-   - GET /api/menu/:category - Get items by category
-   - POST /api/menu - Add new menu item (admin)
-   - PUT /api/menu/:id - Update menu item (admin)
+   - GET /api/menu - Retrieve menu items with filters (search, category, price range, dietary)
+   - GET /api/menu/category/:category - Get items by category
+   - POST /api/menu/createMenu - Add new menu item (admin)
+   - PUT /api/menu/updateMenu/:id - Update menu item (admin)
+   - PATCH /api/menu/stock/:id - Update stock level (admin)
+   - DELETE /api/menu/deleteMenu/:id - Delete menu item (admin)
+   - GET /api/menu/check-stock/:id - Check item stock availability
 
-2. **User Management**
+2. **User Authentication**
    - POST /api/auth/register - User registration
    - POST /api/auth/login - User authentication
-   - GET /api/user/profile - Get user profile
+   - GET /api/auth/profile - Get user profile
 
 3. **Order System**
-   - POST /api/orders - Create new order
-   - GET /api/orders/:userId - Get user orders
-   - PUT /api/orders/:id - Update order status
+   - POST /api/orders - Create new order with stock verification
+   - GET /api/orders/my-orders - Get user's orders
+   - GET /api/orders/all - Get all orders (admin)
+   - PATCH /api/orders/:orderId/status - Update order status (admin)
 
-## Database Schema Design
+## Database Schema Implementation
 1. **Menu Items**
-   - Name
-   - Category
-   - Price
-   - Description
-   - Image URL
-   - Dietary flags
+   - title: String
+   - category: String
+   - price: Number
+   - description: String
+   - imageUrl: String
+   - dietaryFlags: [String]
+   - stock: Number
+   - ingredients: [String]
+   - popularity: Number
+   - isSpecial: Boolean
+   - createdAt: Date
 
 2. **Users**
-   - Username
-   - Email
-   - Password (hashed)
-   - Role (customer/admin)
+   - name: String
+   - email: String (unique)
+   - username: String (unique)
+   - password: String (hashed)
+   - role: String (user/admin)
+   - createdAt: Date
 
 3. **Orders**
-   - User reference
-   - Items
-   - Total price
-   - Status
-   - Timestamp
-
-## Division of Labor
-- **Tingting Huang**:
-  - API development
-  - Database implementation
-  - Authentication system
-
-- **Jiahui Pan**:
-  - Order management system
-  - Testing and Documentation
-  - Render deployment and CI/CD setup
+   - userId: Reference
+   - items: [{menuItemId, quantity, price}]
+   - totalPrice: Number
+   - status: String (enum)
+   - deliveryAddress: String
+   - contactNumber: String
+   - timestamps: true
 
 ## Development Timeline
 1. **Week 1: Setup & Planning**
@@ -109,3 +152,48 @@ Backend services for Fresh Fusion sushi restaurant web application, providing AP
 - Integration testing for database operations
 - Security testing for authentication
 - Load testing for performance verification
+
+## Time Tracking
+- **Tingting Huang**:
+  - API development
+  - Database implementation
+  - Authentication system
+
+- **Jiahui Pan (40 hours)**:
+  - Order management system (15h)
+  - Testing and Documentation (10h)
+  - Render deployment and CI/CD setup (15h)
+
+## Development Achievements
+1. **Core Features**
+   - Implemented comprehensive menu management system
+   - Built secure user authentication with JWT
+   - Created order processing with stock management
+   - Added admin-specific functionalities
+
+2. **Advanced Features**
+   - Stock tracking and validation
+   - Menu filtering and search
+   - Pagination support
+   - Role-based access control
+
+3. **Security Features**
+   - JWT authentication
+   - Password hashing
+   - Admin middleware protection
+   - Input validation
+
+## Self-Assessment
+Grade Proposition: 5/5
+
+**Successes:**
+- Successfully implemented all core requirements
+- Created a robust authentication system
+- Achieved efficient database operations
+- Deployed with production-grade security
+
+**Areas for Improvement:**
+
+- Could add more automated tests
+- Real-time notifications could be implemented
+- Cache system could be optimized

@@ -36,7 +36,12 @@ const userSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  }, orders: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Order',
+    },
+  ],
 });
 
 // Hash password before saving

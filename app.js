@@ -7,6 +7,9 @@ const authRoutes = require('./routes/auth');
 const menuRoutes = require('./routes/menu');
 const orderRoutes = require('./routes/orders');
 
+
+
+
 const app = express();
 
 // Update CORS configuration
@@ -48,6 +51,9 @@ app.get('/api/test', (req, res) => {
 app.use('/api/auth', authRoutes);  // Add auth routes
 app.use('/api/menu', menuRoutes); // Add menu routes
 app.use('/api/orders', orderRoutes); // Add order routes
+
+
+  
 
 // Error handling middleware
 app.use((err, req, res, next) => {

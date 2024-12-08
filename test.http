@@ -51,20 +51,29 @@ Content-Type: application/json
 
 ###
 ### 登录Admin 
-POST http://localhost:5000/auth/login
+POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@example.com",
+   "username": "admin",
   "password": "admin123"
 
 }
 
 ###
-POST http://localhost:5000/auth/admin-route
+POST http://localhost:5000/api/auth/admin-route
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU1YzhkNGE3N2QyYWYxZWU4Nzc0MDYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzM2NzY4NDAsImV4cCI6MTczNDI4MTY0MH0.n_5nF5mo-o4t2QEUS8TZI3CCiBpeJdSDIqrW-shFqNY
 Content-Type: application/json
 
+### Orders - for each User
+GET http://localhost:5000/api/auth/user/menu
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU2MGNiZDNiOWZlYWRmZjY1OTQ2ZWMiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMzNjk0MTI0LCJleHAiOjE3MzM3ODA1MjR9.PFyqnR9jOl7Uc1RaIEdPXaRceMLmPb8XP65cYwAjEQI
+
+### Delete User (only Admin)
+DELETE http://localhost:5000/api/auth/user/675609dd3b9825499e8fabb4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU2MGNiZDNiOWZlYWRmZjY1OTQ2ZWMiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMzNjk0MTI0LCJleHAiOjE3MzM3ODA1MjR9.PFyqnR9jOl7Uc1RaIEdPXaRceMLmPb8XP65cYwAjEQI
 
 
-
+### 
+GET http://localhost:5000/api/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU2MGNiZDNiOWZlYWRmZjY1OTQ2ZWMiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMzNjk0MTI0LCJleHAiOjE3MzM3ODA1MjR9.PFyqnR9jOl7Uc1RaIEdPXaRceMLmPb8XP65cYwAjEQI

@@ -87,4 +87,4 @@ router.patch('/:orderId/status', authenticateJWT, isAdmin, async (req, res) => {
   }
 });
 
-// module.exports = router;
+module.exports = router;

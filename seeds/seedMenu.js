@@ -8,10 +8,6 @@ const menuItems = [
     category: "Nigiri",
     price: 8.99,
     description: "Fresh salmon on hand-pressed rice",
-<<<<<<< HEAD
-=======
-    imageUrl: "https://example.com/salmon-nigiri.jpg",
->>>>>>> 4b280d01bfc0cff1f28ad164c177889dfbc584c6
     imageUrl: "https://images.pexels.com/photos/26731029/pexels-photo-26731029.jpeg",
     dietaryFlags: ["pescatarian"],
     stock: 50,

@@ -3,7 +3,17 @@ const router = express.Router();
 const MenuItem = require('../models/MenuItem');
 const { authenticateJWT, isAdmin } = require('../middleware/authMiddleware');
 
-// Get menu items with filters
+/**
+ * Get menu items with filters
+ * GET /menu
+ * @query {String} category - Filter by category
+ * @query {String} search - Search in title and description
+ * @query {Number} minPrice - Minimum price filter
+ * @query {Number} maxPrice - Maximum price filter
+ * @query {String} dietary - Comma-separated dietary flags
+ * @query {Number} page - Page number for pagination
+ * @query {Number} limit - Items per page
+ */
 router.get('/', async (req, res) => {
   try {
     const { 
@@ -53,7 +63,17 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Post new menu (requires admin authentication)
+/**
+ * Create new menu item
+ * POST /menu/createMenu
+ * Requires admin authentication
+ * @body {String} title - Item title
+ * @body {String} category - Item category
+ * @body {Number} price - Item price
+ * @body {String} description - Item description
+ * @body {String} imageURL - Item image URL
+ * @body {Array} dietaryFlags - Dietary information flags
+ */
 router.post('/createMenu', authenticateJWT, isAdmin, async (req, res) => {
   try {
     const { title, category, price, description, imageURL, dietaryFlags } = req.body; 

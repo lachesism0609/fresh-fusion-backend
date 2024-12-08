@@ -13,40 +13,41 @@ Backend services for Fresh Fusion sushi restaurant web application, providing AP
 ## Source Code
 The complete source code is available on GitHub:
 - Repository: [Fresh-Fusion-Backend](https://gitlab.labranet.jamk.fi/AE8278/sushi-lover/-/tree/main/fresh-fusion-backend)
+- Database: [MongoDB Atlas]()
 - Branch: main
 - Access: Public
 
 ## Application Structure
-fresh-fusion-backend/
-├── app.js                 # Main application entry point
-├── server.js             # Server configuration
-├── package.json          # Project dependencies
-├── README.md            # Project documentation
-├── test.http            # API endpoint tests
-│
-├── controllers/         # Business logic
-│   ├── authController.js  # Authentication logic
-│   ├── menuController.js  # Menu management
-│   └── orderController.js # Order processing
-│
-├── middleware/         # Custom middleware
-│   └── authMiddleware.js # Authentication middleware
-│
-├── models/            # Database schemas
-│   ├── MenuItem.js    # Menu item model
-│   ├── Order.js       # Order model
-│   └── User.js        # User model
-│
-├── routes/           # API routes
-│   ├── auth.js       # Authentication routes
-│   ├── menu.js       # Menu routes
-│   └── orders.js     # Order routes
-│
-├── seeds/           # Database seeders
-│   └── seedMenu.js  # Menu items seeder
-│
-└── utils/          # Utility functions
-    └── config.js   # Configuration settings
+fresh-fusion-backend/  
+├── app.js                 # Main application entry point  
+├── server.js             # Server configuration  
+├── package.json          # Project dependencies  
+├── README.md            # Project documentation  
+├── test.http            # API endpoint tests  
+│  
+├── controllers/         # Business logic  
+│   ├── authController.js  # Authentication logic  
+│   ├── menuController.js  # Menu management  
+│   └── orderController.js # Order processing  
+│  
+├── middleware/         # Custom middleware  
+│   └── authMiddleware.js # Authentication middleware  
+│  
+├── models/            # Database schemas  
+│   ├── MenuItem.js    # Menu item model  
+│   ├── Order.js       # Order model  
+│   └── User.js        # User model  
+│  
+├── routes/           # API routes  
+│   ├── auth.js       # Authentication routes  
+│   ├── menu.js       # Menu routes  
+│   └── orders.js     # Order routes  
+│  
+├── seeds/           # Database seeders  
+│   └── seedMenu.js  # Menu items seeder  
+│  
+└── utils/          # Utility functions  
+    └── config.js   # Configuration settings  
 
 ## Technical Stack
 ### Backend Framework
@@ -184,7 +185,7 @@ fresh-fusion-backend/
    - Input validation
 
 ## Self-Assessment
-Grade Proposition: 5/5
+Grade Proposition: 4/5
 
 **Successes:**
 - Successfully implemented all core requirements

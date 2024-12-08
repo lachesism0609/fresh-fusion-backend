@@ -1,6 +1,14 @@
 const Menu = require('../models/MenuItem');
 
-// GET all menu items
+/**
+ * Controller functions for menu operations
+ * Handles CRUD operations for menu items
+ */
+
+/**
+ * Retrieves all menu items from the database
+ * @route GET /api/menu
+ */
 exports.getMenu = async (req, res) => {
   try {
     const menu = await Menu.find();
@@ -10,7 +18,11 @@ exports.getMenu = async (req, res) => {
   }
 };
 
-// POST new menu item (admin only)
+/**
+ * Adds a new menu item to the database
+ * @route POST /api/menu
+ * @access Admin only
+ */
 exports.addMenuItem = async (req, res) => {
     console.log('req.role:', req.role); // 调试
   if (req.user.role !== 'admin') {
@@ -25,8 +37,11 @@ exports.addMenuItem = async (req, res) => {
   }
 };
 
-
-// PUT update menu item (admin only)
+/**
+ * Updates an existing menu item
+ * @route PUT /api/menu/:id
+ * @access Admin only
+ */
 exports.updateMenuItem = async (req, res) => {
   // Check if user is admin
   if (req.user.role !== 'admin') {
@@ -64,7 +79,11 @@ exports.updateMenuItem = async (req, res) => {
   }
 };
 
-// DELETE menu item (admin only)
+/**
+ * Deletes a menu item from the database
+ * @route DELETE /api/menu/:id
+ * @access Admin only
+ */
 exports.deleteMenuItem = async (req, res) => { 
     
     if (req.user.role !== 'admin') {
@@ -84,6 +103,3 @@ exports.deleteMenuItem = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
-
-
-  

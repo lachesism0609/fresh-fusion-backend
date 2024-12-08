@@ -4,7 +4,15 @@ const Order = require('../models/Order');
 const MenuItem = require('../models/MenuItem');
 const { authenticateJWT, isAdmin } = require('../middleware/authMiddleware');
 
-// Create new order
+/**
+ * Create a new order
+ * POST /orders
+ * Requires authentication
+ * @body {Array} items - Array of order items with menuItemId and quantity
+ * @body {Number} totalPrice - Total price of the order
+ * @body {String} deliveryAddress - Delivery address
+ * @body {String} contactNumber - Contact number
+ */
 router.post('/', authenticateJWT, async (req, res) => {
   try {
     const { items, totalPrice, deliveryAddress, contactNumber } = req.body;
@@ -44,7 +52,11 @@ router.post('/', authenticateJWT, async (req, res) => {
   }
 });
 
-// Get user's orders
+/**
+ * Get orders for the authenticated user
+ * GET /orders/my-orders
+ * Requires authentication
+ */
 router.get('/my-orders', authenticateJWT, async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.userId })
@@ -56,7 +68,11 @@ router.get('/my-orders', authenticateJWT, async (req, res) => {
   }
 });
 
-// Get all orders (admin only)
+/**
+ * Get all orders in the system
+ * GET /orders/all
+ * Requires admin authentication
+ */
 router.get('/all', authenticateJWT, isAdmin, async (req, res) => {
   try {
     const orders = await Order.find()
@@ -69,7 +85,13 @@ router.get('/all', authenticateJWT, isAdmin, async (req, res) => {
   }
 });
 
-// Update order status (admin only)
+/**
+ * Update order status
+ * PATCH /orders/:orderId/status
+ * Requires admin authentication
+ * @param {String} orderId - Order ID to update
+ * @body {String} status - New status for the order
+ */
 router.patch('/:orderId/status', authenticateJWT, isAdmin, async (req, res) => {
   try {
     const { status } = req.body;

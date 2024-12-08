@@ -7,6 +7,15 @@ const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { authenticateJWT , isAdmin} = require('../middleware/authMiddleware');
 
+/**
+ * User registration
+ * POST /auth/register
+ * @body {String} name - User's full name
+ * @body {String} email - User's email
+ * @body {String} username - User's username
+ * @body {String} password - User's password
+ * @returns {Object} User data and authentication token
+ */
 router.post('/register', async (req, res) => {
   try {
     const { name, email, username, password } = req.body;
@@ -37,6 +46,13 @@ router.post('/register', async (req, res) => {
   }
 });
 
+/**
+ * User login
+ * POST /auth/login
+ * @body {String} username - User's username
+ * @body {String} password - User's password
+ * @returns {Object} Authentication token and user info
+ */
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -69,6 +85,12 @@ router.post('/login', async (req, res) => {
   }
 });
 
+/**
+ * Get user profile
+ * GET /auth/profile
+ * Requires authentication
+ * @returns {Object} User profile data
+ */
 router.get('/profile', authenticateJWT, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('-password');
@@ -78,7 +100,11 @@ router.get('/profile', authenticateJWT, async (req, res) => {
   }
 });
 
-
+/**
+ * Get user menu/orders
+ * GET /auth/user/menu
+ * Requires authentication
+ */
 router.get('/user/menu', authenticateJWT, async (req, res) => {
     try {
       const user = await User.findById(req.userId).populate('orders');
@@ -91,7 +117,13 @@ router.get('/user/menu', authenticateJWT, async (req, res) => {
     }
   });
   
-  router.delete('/user/:id', authenticateJWT, isAdmin, async (req, res) => {
+/**
+ * Delete user
+ * DELETE /auth/user/:id
+ * Requires admin authentication
+ * @param {String} id - User ID to delete
+ */
+router.delete('/user/:id', authenticateJWT, isAdmin, async (req, res) => {
     const { id } = req.params;
     try {
       const user = await User.findById(id);

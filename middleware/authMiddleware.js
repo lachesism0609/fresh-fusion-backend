@@ -3,6 +3,12 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const User = require('../models/User');
 
+/**
+ * Middleware to authenticate JWT tokens
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 const authenticateJWT = (req, res, next) => {
   try {
     const authHeader = req.header('Authorization');
@@ -25,6 +31,12 @@ const authenticateJWT = (req, res, next) => {
   }
 };
 
+/**
+ * Middleware to check if user has admin role
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ */
 const isAdmin = (req, res, next) => {
   if (req.role !== 'admin') {
     return res.status(403).json({ error: 'Admin access required' });

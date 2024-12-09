@@ -32,11 +32,8 @@ mongoose.connect(config.MONGODB_URI, {
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', async () => {
+db.once('open', () => {
   console.log('connected to SushiLover - MongoDB');
-  // Create default admin user
-  const User = require('./models/User');
-  await User.createDefaultAdmin();
 });
 
 // Test route

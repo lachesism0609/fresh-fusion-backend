@@ -19,14 +19,18 @@ const { authenticateJWT , isAdmin} = require('../middleware/authMiddleware');
 router.post('/register', async (req, res) => {
   try {
     const { name, email, username, password } = req.body;
-    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
       return res.status(400).json({ error: 'Username or email already exists' });
     }
 
-    const user = new User({ name, email, username, password });
-    await user.save();
+    const user = await User.create({
+      name,
+      email,
+      username,
+      password // Password will be hashed by the pre-save middleware
+    });
 
     const token = jwt.sign(
       { userId: user._id, username: user.username, role: user.role },
@@ -34,15 +38,10 @@ router.post('/register', async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    res.status(201).json({
-      success: true,
-      message: 'Registration successful',
-      token,
-      username: user.username,
-      role: user.role
-    });
+    res.status(201).json({ token, user: { username: user.username, role: user.role } });
   } catch (error) {
-    res.status(500).json({ success: false, error: 'Registration failed' });
+    console.error('Registration error:', error);
+    res.status(500).json({ error: 'Registration failed' });
   }
 });
 
@@ -59,12 +58,18 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ username });
     
     if (!user) {
-      return res.status(401).json({ error: 'User not found' });
+      return res.status(401).json({ 
+        success: false, 
+        error: 'Invalid credentials' 
+      });
     }
 
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
-      return res.status(401).json({ error: 'Invalid password' });
+      return res.status(401).json({ 
+        success: false, 
+        error: 'Invalid credentials' 
+      });
     }
 
     const token = jwt.sign(
@@ -75,13 +80,20 @@ router.post('/login', async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Login successful',
       token,
-      username: user.username,
-      role: user.role
+      user: {
+        id: user._id,
+        username: user.username,
+        role: user.role
+      }
     });
   } catch (error) {
-    res.status(500).json({ success: false, error: 'Login failed' });
+    console.error('Login error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: 'Login failed',
+      details: error.message 
+    });
   }
 });
 

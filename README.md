@@ -155,10 +155,10 @@ fresh-fusion-backend/
 - Load testing for performance verification
 
 ## Time Tracking
-- **Tingting Huang**:
-  - API development
-  - Database implementation
-  - Authentication system
+- **Tingting Huang (40 hours)**:
+  - API development (15h)
+  - Database implementation (10h)
+  - Authentication system (15h)
 
 - **Jiahui Pan (40 hours)**:
   - Order management system (15h)

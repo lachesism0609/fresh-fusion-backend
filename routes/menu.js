@@ -16,50 +16,12 @@ const { authenticateJWT, isAdmin } = require('../middleware/authMiddleware');
  */
 router.get('/', async (req, res) => {
   try {
-    const { 
-      category, 
-      search, 
-      minPrice, 
-      maxPrice,
-      dietary,
-      page = 1,
-      limit = 10
-    } = req.query;
-
-    let query = {};
-
-    if (category) query.category = category;
-    if (dietary) query.dietaryFlags = { $in: dietary.split(',') };
-    if (search) {
-      query.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } }
-      ];
-    }
-    if (minPrice || maxPrice) {
-      query.price = {};
-      if (minPrice) query.price.$gte = Number(minPrice);
-      if (maxPrice) query.price.$lte = Number(maxPrice);
-    }
-
-    const skip = (page - 1) * limit;
-    
-    const [menuItems, total] = await Promise.all([
-      MenuItem.find(query)
-        .skip(skip)
-        .limit(Number(limit))
-        .sort({ popularity: -1 }),
-      MenuItem.countDocuments(query)
-    ]);
-
-    res.json({
-      items: menuItems,
-      total,
-      page: Number(page),
-      totalPages: Math.ceil(total / limit)
-    });
+    const { category } = req.query;
+    const query = category ? { category } : {};
+    const menuItems = await MenuItem.find(query);
+    res.json({ menuItems });
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching menu items', error: error.message });
+    res.status(500).json({ error: 'Error fetching menu items' });
   }
 });
 
@@ -76,21 +38,14 @@ router.get('/', async (req, res) => {
  */
 router.post('/createMenu', authenticateJWT, isAdmin, async (req, res) => {
   try {
-    const { title, category, price, description, imageURL, dietaryFlags } = req.body; 
-    
-    const newMenuItem = new MenuItem({
-      title,
-      category,
-      price,
-      description,
-      imageURL,
-      dietaryFlags,
-    });
+    console.log('Creating menu item:', req.body); // Debug log
+    console.log('User:', req.user); // Debug log
 
-    const savedMenuItem = await newMenuItem.save();
-    res.status(201).json(savedMenuItem); 
+    const menuItem = await MenuItem.create(req.body);
+    res.status(201).json({ menuItem });
   } catch (error) {
-    res.status(400).json({ message: 'Error creating menu item', error });
+    console.error('Menu creation error:', error); // Debug log
+    res.status(500).json({ error: 'Error creating menu item' });
   }
 });
 

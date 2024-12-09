@@ -18,36 +18,47 @@ The complete source code is available on GitHub:
 - Access: Public
 
 ## Application Structure
-fresh-fusion-backend/  
-├── app.js                 # Main application entry point  
-├── server.js             # Server configuration  
-├── package.json          # Project dependencies  
-├── README.md            # Project documentation  
-├── test.http            # API endpoint tests  
+fresh-fusion-backend/   
 │  
-├── controllers/         # Business logic  
+├── __tests__/          # Test directories  
+│   ├── api/            # API tests  
+│   │   └── menu.test.js  
+│   ├── integration/    # Integration tests  
+│   │   └── database.test.js  
+│   └── security/       # Security tests  
+│       └── auth.test.js  
+│  
+├── app.js             # Main application entry point  
+├── server.js          # Server configuration  
+├── package.json       # Project dependencies  
+├── README.md         # Project documentation  
+├── jest.config.js    # Jest test configuration  
+├── jest.setup.js     # Jest setup file  
+├── load-test.js      # Load testing script  
+│  
+├── controllers/      # Business logic  
 │   ├── authController.js  # Authentication logic  
 │   ├── menuController.js  # Menu management  
 │   └── orderController.js # Order processing  
 │  
-├── middleware/         # Custom middleware  
-│   └── authMiddleware.js # Authentication middleware  
+├── middleware/       # Custom middleware  
+│   └── authMiddleware.js  # Authentication middleware  
 │  
-├── models/            # Database schemas  
-│   ├── MenuItem.js    # Menu item model  
-│   ├── Order.js       # Order model  
-│   └── User.js        # User model  
+├── models/          # Database schemas  
+│   ├── MenuItem.js   # Menu item model  
+│   ├── Order.js      # Order model  
+│   └── User.js       # User model  
 │  
-├── routes/           # API routes  
+├── routes/          # API routes  
 │   ├── auth.js       # Authentication routes  
 │   ├── menu.js       # Menu routes  
 │   └── orders.js     # Order routes  
 │  
 ├── seeds/           # Database seeders  
-│   └── seedMenu.js  # Menu items seeder  
+│   └── seedMenu.js   # Menu items seeder  
 │  
-└── utils/          # Utility functions  
-    └── config.js   # Configuration settings  
+└── utils/           # Utility functions  
+    └── config.js     # Configuration settings  
 
 ## Technical Stack
 ### Backend Framework

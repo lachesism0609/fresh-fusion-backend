@@ -1,5 +1,5 @@
-# Fresh Fusion Backend - Web Services and Server Programming
-Course: TTC8430-3005 Web server programming with an application framework
+# Fresh Fusion Backend
+Course: TTC8430-3005 Web server programming with an application framework  
 Date: December 2024
 
 - **Group**: Sushi Lover

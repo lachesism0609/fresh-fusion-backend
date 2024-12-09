@@ -13,7 +13,7 @@ Backend services for Fresh Fusion sushi restaurant web application, providing AP
 ## Source Code
 The complete source code is available on GitHub:
 - Repository: [Fresh-Fusion-Backend](https://gitlab.labranet.jamk.fi/AE8278/sushi-lover/-/tree/main/fresh-fusion-backend)
-- Database: [MongoDB Atlas]()
+- Frontend website: [Fresh Fusion](https://ae8278.pages.labranet.jamk.fi/sushi-lover)
 - Branch: main
 - Access: Public
 

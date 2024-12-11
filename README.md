@@ -1,7 +1,6 @@
-# Fresh Fusion Backend
-Course: TTC8430-3005 Web server programming with an application framework  
-Date: December 2024
-
+# Fresh Fusion Backend (TTC8430-3005)
+- **Course**: TTC8430-3005 Web server programming with an application framework  
+- **Date**: December 2024
 - **Group**: Sushi Lover
 - **Members**: 
   - Jiahui Pan (AE8278)
